@@ -1,0 +1,26 @@
+prompts_file: "configs/image_prompts.yaml"
+pretrained_model:
+  name_or_path: "stable-diffusion-v1-5/stable-diffusion-v1-5"    # Pretrained T2I model
+  # name_or_path: "CompVis/stable-diffusion-v1-4" # Alternate pretrained T2I model
+  precision: "fp16"                     # Mixed precision for faster training
+  height: 512
+  width: 512
+  max_steps: 50
+network:
+  rank: 5                             # LoRA rank (dimensionality of the low-rank matrix)
+  alpha: 1.0                          # Scaling factor for LoRA weights
+  training_method: "noxattn"          # LoRA injection target, specific to ModelScope's UNet
+eval:
+  type: "diffusion"
+  batch_size: 1                       # Number of videos per batch (keep small due to memory)
+save:
+  name: "stable_diffusion"
+  path: "./models"
+  per_steps: 100
+  precision: "bfloat16"
+  output_path: "./outputs"
+logging:
+  use_wandb: false
+  verbose: false
+other:
+  use_xformers: true
