@@ -1,0 +1,34 @@
+static_prompts_file: "configs/static_prompts.yaml"
+dynamic_prompts_file: "configs/dynamic_prompts.yaml"
+image_prompts_file: "configs/image_prompts.yaml"
+pretrained_model:
+  name_or_path: "THUDM/CogVideoX-2b"    # Pretrained T2V model
+  type: "t2v"                           # Specify the model type to distinguish it from SD
+  precision: "fp16"                     # Mixed precision for faster training
+network:
+  rank: 5                             # LoRA rank (dimensionality of the low-rank matrix)
+  alpha: 1.0                          # Scaling factor for LoRA weights
+  training_method: "noxattn"          # LoRA injection target, specific to ModelScope's UNet
+train:
+  precision: "bfloat16"
+  batch_size: 1                       # Number of videos per batch (keep small due to memory)
+  max_train_steps: 1000               # Total training steps
+  save_every_n_steps: 100             # Save LoRA weights every n steps
+  log_every_n_steps: 10               # Log progress every n steps
+  learning_rate: 1e-4                 # Initial learning rate
+  lr_scheduler: "cosine"              # Learning rate scheduler
+  lr_warmup_steps: 50                 # Warmup steps for learning rate
+eval:
+  type: "diffusion"
+  batch_size: 1                       # Number of videos per batch (keep small due to memory)
+save:
+  name: "cogvideox"
+  path: "./models"
+  per_steps: 100
+  precision: "bfloat16"
+  generated_videos_path: "./generated_videos"
+logging:
+  use_wandb: false
+  verbose: false
+other:
+  use_xformers: true

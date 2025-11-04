@@ -1,0 +1,781 @@
+
+#- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image."
+#  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image, very fat, chubby, overweight, obese."
+#  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image, very skinny, thin, slim, lean."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "chubby_real3"
+#  variations:
+#    - positive: "A realistic image of a Black person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a Black person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of a White person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a White person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of an Asian person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of an Asian person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of a Latino person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a Latino person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of a male person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a male person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of a female person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a female person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of a Middle Eastern person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a Middle Eastern person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of an Indigenous person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of an Indigenous person, very skinny, thin, slim, lean."
+#
+#
+#- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image image.
+#."
+#  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image image, smiling widely, very happy."
+#  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image image, frowning, very sad."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "smiling_real3"
+#  variations:
+#    - positive: "A realistic image of a child, smiling widely, very happy."
+#      negative: "A realistic image of a child, frowning, very sad."
+#    - positive: "A realistic image of a senior, smiling widely, very happy."
+#      negative: "A realistic image of a senior, frowning, very sad."
+#    - positive: "A realistic image of a man, smiling widely, very happy."
+#      negative: "A realistic image of a man, frowning, very sad."
+#    - positive: "A realistic image of a woman, smiling widely, very happy."
+#      negative: "A realistic image of a woman, frowning, very sad."
+#    - positive: "A realistic image of an Asian person, smiling widely, very happy."
+#      negative: "A realistic image of an Asian person, frowning, very sad."
+#    - positive: "A realistic image of a Latino person, smiling widely, very happy."
+#      negative: "A realistic image of a Latino person, frowning, very sad."
+#    - positive: "A realistic image of a Black person, smiling widely, very happy."
+#      negative: "A realistic image of a Black person, frowning, very sad."
+#    - positive: "A realistic image of a White person, smiling widely, very happy."
+#      negative: "A realistic image of a White person, frowning, very sad."
+#
+#
+#- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image.
+#."
+#  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image.
+#, very old, aged, wrinkly."
+#  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image.
+#, very young, clear skin."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "age_real3"
+#  variations:
+#    - positive: "A realistic image of a Black person, very old, aged, wrinkly."
+#      negative: "A realistic image of a Black person, very young, clear skin."
+#    - positive: "A realistic image of a White person, very old, aged, wrinkly."
+#      negative: "A realistic image of a White person, very young, clear skin."
+#    - positive: "A realistic image of an Asian person, very old, aged, wrinkly."
+#      negative: "A realistic image of an Asian person, very young, clear skin."
+#    - positive: "A realistic image of a Latino person, very old, aged, wrinkly."
+#      negative: "A realistic image of a Latino person, very young, clear skin."
+#    - positive: "A realistic image of a Middle Eastern person, very old, aged, wrinkly."
+#      negative: "A realistic image of a Middle Eastern person, very young, clear skin."
+#    - positive: "A realistic image of a male person, very old, aged, wrinkly."
+#      negative: "A realistic image of a male person, very young, clear skin."
+#    - positive: "A realistic image of a female person, very old, aged, wrinkly."
+#      negative: "A realistic image of a female person, very young, clear skin."
+#    - positive: "A realistic image of an Indigenous person, very old, aged, wrinkly."
+#      negative: "A realistic image of an Indigenous person, very young, clear skin."
+#
+#
+#- neutral: "A realistic photograph of a car on a city street during the day, natural lighting, clear details, realistic city background."
+#  positive: "A realistic photograph of a car on a city street during the day, natural lighting, clear details, realistic city background, damaged, broken headlights, dented car, with scrapped paintwork."
+#  negative: "A realistic photograph of a car on a city street during the day, natural lighting, clear details, realistic city background, mint condition, brand new, shiny."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "damaged_car_real3"
+#  variations:
+#    - positive: "A realistic image of an old sedan car, damaged, broken headlights, dented, scrapped paintwork."
+#      negative: "A realistic image of an old sedan car, mint condition, brand new, shiny."
+#    - positive: "A realistic image of a sports car, damaged, broken headlights, dented, scrapped paintwork."
+#      negative: "A realistic image of a sports car, mint condition, brand new, shiny."
+#    - positive: "A realistic image of an SUV, damaged, broken headlights, dented, scrapped paintwork."
+#      negative: "A realistic image of an SUV, mint condition, brand new, shiny."
+#    - positive: "A realistic image of a vintage car, damaged, broken headlights, dented, scrapped paintwork."
+#      negative: "A realistic image of a vintage car, mint condition, restored, shiny."
+#    - positive: "A realistic image of an electric car, damaged, broken headlights, dented, scrapped paintwork."
+#      negative: "A realistic image of an electric car, mint condition, brand new, shiny."
+#    - positive: "A realistic image of a truck, damaged, broken headlights, dented, scrapped paintwork."
+#      negative: "A realistic image of a truck, mint condition, brand new, shiny."
+#    - positive: "A realistic image of a luxury car, damaged, broken headlights, dented, scrapped paintwork."
+#      negative: "A realistic image of a luxury car, mint condition, brand new, shiny."
+#    - positive: "A realistic image of a compact car, damaged, broken headlights, dented, scrapped paintwork."
+#      negative: "A realistic image of a compact car, mint condition, brand new, shiny."
+#
+#
+#- neutral: "A realistic close up photograph of a room with furniture, natural lighting, detailed textures."
+#  positive: "A realistic photograph of a room with furniture, natural lighting, detailed textures, messy, cluttered object, misaligned furniture, disorganized."
+#  negative: "A realistic photograph of a room with furniture, natural lighting, detailed textures, clean and neat, brand new."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "cluttered_room_real3"
+#  variations:
+#      - positive: "A realistic image of a bedroom, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a bedroom, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a kitchen, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a kitchen, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a living room, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a living room, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a child's playroom, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a child's playroom, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of an artist's studio, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of an artist's studio, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a workshop, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a workshop, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a college dorm room, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a college dorm room, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a home office, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a home office, super organized, clean, ordered, neat, tidy."
+#
+#- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image."
+#  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image, with big bushy beard."
+#  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image, clean shaven."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "beard_real3"
+#  variations:
+#    - positive: "A realistic image of a Black man, with big bushy beard."
+#      negative: "A realistic image of a Black man, clean shaven."
+#    - positive: "A realistic image of a White man, with big bushy beard."
+#      negative: "A realistic image of a White man, clean shaven."
+#    - positive: "A realistic image of a Middle Eastern man, with big bushy beard."
+#      negative: "A realistic image of a Middle Eastern man, clean shaven."
+#    - positive: "A realistic image of an elderly man, with big bushy beard."
+#      negative: "A realistic image of an elderly man, clean shaven."
+#    - positive: "A realistic image of a hipster man, with big bushy beard."
+#      negative: "A realistic image of a hipster man, clean shaven."
+#    - positive: "A realistic image of a rugged man, with big bushy beard."
+#      negative: "A realistic image of a rugged man, clean shaven."
+#    - positive: "A realistic image of a male traveler, with big bushy beard."
+#      negative: "A realistic image of a male traveler, clean shaven."
+#    - positive: "A realistic image of a mountain climber, with big bushy beard."
+#      negative: "A realistic image of a mountain climber, clean shaven."
+#
+#- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image."
+#  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image, wearing glasses."
+#  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image, clear face."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "glasses_real3"
+#  variations:
+#    - positive: "A realistic image of a young person, wearing glasses."
+#      negative: "A realistic image of a young person, clear face."
+#    - positive: "A realistic image of an elderly person, wearing glasses."
+#      negative: "A realistic image of an elderly person, clear face."
+#    - positive: "A realistic image of a student, wearing glasses."
+#      negative: "A realistic image of a student, clear face."
+#    - positive: "A realistic image of a businessperson, wearing glasses."
+#      negative: "A realistic image of a businessperson, clear face."
+#    - positive: "A realistic image of a man, wearing glasses."
+#      negative: "A realistic image of a man, clear face."
+#    - positive: "A realistic image of a woman, wearing glasses."
+#      negative: "A realistic image of a woman, clear face."
+#    - positive: "A realistic image of a scientist, wearing glasses."
+#      negative: "A realistic image of a scientist, clear face."
+#    - positive: "A realistic image of an artist, wearing glasses."
+#      negative: "A realistic image of an artist, clear face."
+#
+#- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image."
+#  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image, with makeup, cosmetic, concealer, mascara, lipstick."
+#  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image, ugly."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "lipstick_real3"
+#  variations:
+#    - positive: "A realistic image of a Black woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a Black woman, ugly."
+#    - positive: "A realistic image of a White woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a White woman, ugly."
+#    - positive: "A realistic image of an Asian woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of an Asian woman, ugly."
+#    - positive: "A realistic image of a Latina woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a Latina woman, ugly."
+#    - positive: "A realistic image of a Middle Eastern woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a Middle Eastern woman, ugly."
+#    - positive: "A realistic image of an elderly woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of an elderly woman, ugly."
+#    - positive: "A realistic image of a young woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a young woman, ugly."
+#    - positive: "A realistic image of a male person with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a male person, ugly."
+#
+#- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image."
+#  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image, with shocked look, surprised, stunned, amazed."
+#  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, realistic background of the city or a coffee shop with depth of field, photorealistic image, dull, uninterested, bored, incurious."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "surprised_real3"
+#  variations:
+#    - positive: "A realistic image of a child with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a child, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a senior with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a senior, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a Black person with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a Black person, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a White person with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a White person, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of an Asian person with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of an Asian person, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a male person with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a male person, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a female person with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a female person, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a businessperson with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a businessperson, dull, uninterested, bored, incurious."
+#
+#- neutral: "A realistic close up photo of a dining table filled with food, natural lighting, authentic textures, realistic dining room background."
+#  positive: "A realistic photo of a dining table filled with food, natural lighting, authentic textures, realistic dining room background, all food is cooked and prepped, in dishes."
+#  negative: "A realistic photo of a dining table filled with food, natural lighting, authentic textures, realistic dining room background, the food is raw, natural, not prepped in any way, just ingredients."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "cooked_food_real3"
+#  variations:
+#    - positive: "A realistic image of a table of Italian food, cooked and prepped, in dishes."
+#      negative: "A realistic image of  a table of Italian food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of Chinese food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of Chinese food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of Mexican food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of Mexican food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of Indian food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of Indian food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of traditional breakfast food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of breakfast food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of seafood dishes, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of seafood, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of vegetarian food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of vegetarian food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of fast food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of fast food ingredients, raw, natural, not prepped in any way."
+
+- neutral: "A realistic image of a dog playing in a park, realistic background, furry, sunny."
+  positive: "A realistic image of a very light all white dog playing in a park, realistic background, all light white fur."
+  negative: "A realistic image of a very dark all black dog playing in a park, realistic background, all dark black fur."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "dog1"
+  variations:
+    - positive: "dog"
+      negative: "dog"
+
+
+#- neutral: "A highly realistic portrait of a person, photographed at head-and-shoulders distance. Natural sunlight streams through a nearby window, softly illuminating the face with warm tones. subtle décor, creating a cinematic and natural background. Captured with a DSLR camera, sharp focus on the person’s face, natural skin texture, realistic lighting."
+#  positive: "A photorealistic portrait of a person, smiling widely, very happy, very old, aged, wrinkly."
+#  negative: "A photorealistic portrait of a person, frowning, very sad, detailed facial features, clear skin."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "smiling_age_composition"
+#  variations:
+#    - positive: "A realistic image of a person."
+#      negative: "A realistic image of a person."
+
+#- neutral: "A realistic image of a person."
+#  positive: "A realistic image of a person, very fat, chubby, overweight, obese."
+#  negative: "A realistic image of a person, very skinny, thin, slim, lean."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "chubby"
+#  variations:
+#    - positive: "A realistic image of a Black person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a Black person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of a White person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a White person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of an Asian person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of an Asian person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of a Latino person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a Latino person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of a male person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a male person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of a female person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a female person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of a Middle Eastern person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of a Middle Eastern person, very skinny, thin, slim, lean."
+#    - positive: "A realistic image of an Indigenous person, very fat, chubby, overweight, obese."
+#      negative: "A realistic image of an Indigenous person, very skinny, thin, slim, lean."
+#
+#
+#- neutral: "A realistic image of a person."
+#  positive: "A realistic image of a person, smiling widely, very happy."
+#  negative: "A realistic image of a person, frowning, very sad."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "smiling"
+#  variations:
+#    - positive: "A realistic image of a child, smiling widely, very happy."
+#      negative: "A realistic image of a child, frowning, very sad."
+#    - positive: "A realistic image of a senior, smiling widely, very happy."
+#      negative: "A realistic image of a senior, frowning, very sad."
+#    - positive: "A realistic image of a man, smiling widely, very happy."
+#      negative: "A realistic image of a man, frowning, very sad."
+#    - positive: "A realistic image of a woman, smiling widely, very happy."
+#      negative: "A realistic image of a woman, frowning, very sad."
+#    - positive: "A realistic image of an Asian person, smiling widely, very happy."
+#      negative: "A realistic image of an Asian person, frowning, very sad."
+#    - positive: "A realistic image of a Latino person, smiling widely, very happy."
+#      negative: "A realistic image of a Latino person, frowning, very sad."
+#    - positive: "A realistic image of a Black person, smiling widely, very happy."
+#      negative: "A realistic image of a Black person, frowning, very sad."
+#    - positive: "A realistic image of a White person, smiling widely, very happy."
+#      negative: "A realistic image of a White person, frowning, very sad."
+#
+#
+#- neutral: "A realistic image of a person."
+#  positive: "A realistic image of a person, very old, aged, wrinkly."
+#  negative: "A realistic image of a person, detailed facial features, clear skin."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "age"
+#  variations:
+#    - positive: "A realistic image of a Black person, very old, aged, wrinkly."
+#      negative: "A realistic image of a Black person, very young, clear skin."
+#    - positive: "A realistic image of a White person, very old, aged, wrinkly."
+#      negative: "A realistic image of a White person, very young, clear skin."
+#    - positive: "A realistic image of an Asian person, very old, aged, wrinkly."
+#      negative: "A realistic image of an Asian person, very young, clear skin."
+#    - positive: "A realistic image of a Latino person, very old, aged, wrinkly."
+#      negative: "A realistic image of a Latino person, very young, clear skin."
+#    - positive: "A realistic image of a Middle Eastern person, very old, aged, wrinkly."
+#      negative: "A realistic image of a Middle Eastern person, very young, clear skin."
+#    - positive: "A realistic image of a male person, very old, aged, wrinkly."
+#      negative: "A realistic image of a male person, very young, clear skin."
+#    - positive: "A realistic image of a female person, very old, aged, wrinkly."
+#      negative: "A realistic image of a female person, very young, clear skin."
+#    - positive: "A realistic image of an Indigenous person, very old, aged, wrinkly."
+#      negative: "A realistic image of an Indigenous person, very young, clear skin."
+#
+#
+- neutral: "A realistic image of a car."
+  positive: "A realistic image of a car, damaged, broken headlights, dented car, with scrapped paintwork."
+  negative: "A realistic image of a car, mint condition, brand new, shiny."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "damaged_car"
+  variations:
+    - positive: "A realistic image of an old sedan car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of an old sedan car, mint condition, brand new, shiny."
+    - positive: "A realistic image of a sports car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of a sports car, mint condition, brand new, shiny."
+    - positive: "A realistic image of an SUV, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of an SUV, mint condition, brand new, shiny."
+    - positive: "A realistic image of a vintage car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of a vintage car, mint condition, restored, shiny."
+    - positive: "A realistic image of an electric car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of an electric car, mint condition, brand new, shiny."
+    - positive: "A realistic image of a truck, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of a truck, mint condition, brand new, shiny."
+    - positive: "A realistic image of a luxury car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of a luxury car, mint condition, brand new, shiny."
+    - positive: "A realistic image of a compact car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of a compact car, mint condition, brand new, shiny."
+
+
+#- neutral: "A realistic image of a room."
+#  positive: "A realistic image of a room, cluttered, disorganized, dirty, jumbled, scattered."
+#  negative: "A realistic image of a room, super organized, clean, ordered, neat, tidy."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "cluttered_room"
+#  variations:
+#      - positive: "A realistic image of a bedroom, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a bedroom, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a kitchen, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a kitchen, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a living room, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a living room, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a child's playroom, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a child's playroom, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of an artist's studio, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of an artist's studio, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a workshop, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a workshop, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a college dorm room, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a college dorm room, super organized, clean, ordered, neat, tidy."
+#      - positive: "A realistic image of a home office, cluttered, disorganized, dirty, jumbled, scattered."
+#        negative: "A realistic image of a home office, super organized, clean, ordered, neat, tidy."
+#
+#
+#- neutral: "A realistic image of a person."
+#  positive: "A realistic image of a person, with big bushy beard."
+#  negative: "A realistic image of a person, clean shaven."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "beard"
+#  variations:
+#    - positive: "A realistic image of a Black man, with big bushy beard."
+#      negative: "A realistic image of a Black man, clean shaven."
+#    - positive: "A realistic image of a White man, with big bushy beard."
+#      negative: "A realistic image of a White man, clean shaven."
+#    - positive: "A realistic image of a Middle Eastern man, with big bushy beard."
+#      negative: "A realistic image of a Middle Eastern man, clean shaven."
+#    - positive: "A realistic image of an elderly man, with big bushy beard."
+#      negative: "A realistic image of an elderly man, clean shaven."
+#    - positive: "A realistic image of a hipster man, with big bushy beard."
+#      negative: "A realistic image of a hipster man, clean shaven."
+#    - positive: "A realistic image of a rugged man, with big bushy beard."
+#      negative: "A realistic image of a rugged man, clean shaven."
+#    - positive: "A realistic image of a male traveler, with big bushy beard."
+#      negative: "A realistic image of a male traveler, clean shaven."
+#    - positive: "A realistic image of a mountain climber, with big bushy beard."
+#      negative: "A realistic image of a mountain climber, clean shaven."
+#
+#- neutral: "A realistic image of a person."
+#  positive: "A realistic image of a person, wearing glasses."
+#  negative: "A realistic image of a person, clear face."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "glasses"
+#  variations:
+#    - positive: "A realistic image of a young person, wearing glasses."
+#      negative: "A realistic image of a young person, clear face."
+#    - positive: "A realistic image of an elderly person, wearing glasses."
+#      negative: "A realistic image of an elderly person, clear face."
+#    - positive: "A realistic image of a student, wearing glasses."
+#      negative: "A realistic image of a student, clear face."
+#    - positive: "A realistic image of a businessperson, wearing glasses."
+#      negative: "A realistic image of a businessperson, clear face."
+#    - positive: "A realistic image of a man, wearing glasses."
+#      negative: "A realistic image of a man, clear face."
+#    - positive: "A realistic image of a woman, wearing glasses."
+#      negative: "A realistic image of a woman, clear face."
+#    - positive: "A realistic image of a scientist, wearing glasses."
+#      negative: "A realistic image of a scientist, clear face."
+#    - positive: "A realistic image of an artist, wearing glasses."
+#      negative: "A realistic image of an artist, clear face."
+#
+#
+#- neutral: "A realistic image of a person."
+#  positive: "A realistic image of a person, with makeup, cosmetic, concealer, mascara, lipstick."
+#  negative: "A realistic image of a person, ugly."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "lipstick"
+#  variations:
+#    - positive: "A realistic image of a Black woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a Black woman, ugly."
+#    - positive: "A realistic image of a White woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a White woman, ugly."
+#    - positive: "A realistic image of an Asian woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of an Asian woman, ugly."
+#    - positive: "A realistic image of a Latina woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a Latina woman, ugly."
+#    - positive: "A realistic image of a Middle Eastern woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a Middle Eastern woman, ugly."
+#    - positive: "A realistic image of an elderly woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of an elderly woman, ugly."
+#    - positive: "A realistic image of a young woman with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a young woman, ugly."
+#    - positive: "A realistic image of a male person with makeup, concealer, mascara, lipstick."
+#      negative: "A realistic image of a male person, ugly."
+#
+#
+#- neutral: "A realistic image of a person."
+#  positive: "A realistic image of a person, with shocked look, surprised, stunned, amazed."
+#  negative: "A realistic image of a person, dull, uninterested, bored, incurious."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "surprised"
+#  variations:
+#    - positive: "A realistic image of a child with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a child, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a senior with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a senior, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a Black person with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a Black person, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a White person with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a White person, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of an Asian person with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of an Asian person, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a male person with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a male person, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a female person with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a female person, dull, uninterested, bored, incurious."
+#    - positive: "A realistic image of a businessperson with shocked look, surprised, stunned, amazed."
+#      negative: "A realistic image of a businessperson, dull, uninterested, bored, incurious."
+#
+#- neutral: "A realistic image of a table of food."
+#  positive: "A realistic image of a table of food, cooked and prepped, in dishes."
+#  negative: "A realistic image of a table of food, raw, natural, not prepped in any way."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "cooked_food"
+#  variations:
+#    - positive: "A realistic image of a table of Italian food, cooked and prepped, in dishes."
+#      negative: "A realistic image of  a table of Italian food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of Chinese food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of Chinese food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of Mexican food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of Mexican food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of Indian food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of Indian food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of traditional breakfast food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of breakfast food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of seafood dishes, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of seafood, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of vegetarian food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of vegetarian food, raw, natural, not prepped in any way."
+#    - positive: "A realistic image of a table of fast food, cooked and prepped, in dishes."
+#      negative: "A realistic image of a table of fast food ingredients, raw, natural, not prepped in any way."
+
+#- neutral: "A wine glass."
+#  positive: "A wine glass that is filled to the brim, overflowing."
+#  negative: "An empty wine glass."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "wine"
+#  variations:
+#    - positive: "A red wine glass that is filled to the brim, overflowing."
+#      negative: "An empty red wine glass."
+#    - positive: "A white wine glass that is filled to the brim, overflowing."
+#      negative: "An empty white wine glass."
+
+- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic.
+."
+  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic.
+, very fat, chubby, overweight, obese."
+  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic.
+, very skinny, thin, slim, lean."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "chubby_real1"
+  variations:
+    - positive: "A realistic image of a Black person, very fat, chubby, overweight, obese."
+      negative: "A realistic image of a Black person, very skinny, thin, slim, lean."
+    - positive: "A realistic image of a White person, very fat, chubby, overweight, obese."
+      negative: "A realistic image of a White person, very skinny, thin, slim, lean."
+    - positive: "A realistic image of an Asian person, very fat, chubby, overweight, obese."
+      negative: "A realistic image of an Asian person, very skinny, thin, slim, lean."
+    - positive: "A realistic image of a Latino person, very fat, chubby, overweight, obese."
+      negative: "A realistic image of a Latino person, very skinny, thin, slim, lean."
+    - positive: "A realistic image of a male person, very fat, chubby, overweight, obese."
+      negative: "A realistic image of a male person, very skinny, thin, slim, lean."
+    - positive: "A realistic image of a female person, very fat, chubby, overweight, obese."
+      negative: "A realistic image of a female person, very skinny, thin, slim, lean."
+    - positive: "A realistic image of a Middle Eastern person, very fat, chubby, overweight, obese."
+      negative: "A realistic image of a Middle Eastern person, very skinny, thin, slim, lean."
+    - positive: "A realistic image of an Indigenous person, very fat, chubby, overweight, obese."
+      negative: "A realistic image of an Indigenous person, very skinny, thin, slim, lean."
+
+
+- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic.
+."
+  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic.
+, smiling widely, very happy."
+  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, realistic background that outside with depth of field, photorealistic.
+, frowning, very sad."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "smiling_real1"
+  variations:
+    - positive: "A realistic image of a child, smiling widely, very happy."
+      negative: "A realistic image of a child, frowning, very sad."
+    - positive: "A realistic image of a senior, smiling widely, very happy."
+      negative: "A realistic image of a senior, frowning, very sad."
+    - positive: "A realistic image of a man, smiling widely, very happy."
+      negative: "A realistic image of a man, frowning, very sad."
+    - positive: "A realistic image of a woman, smiling widely, very happy."
+      negative: "A realistic image of a woman, frowning, very sad."
+    - positive: "A realistic image of an Asian person, smiling widely, very happy."
+      negative: "A realistic image of an Asian person, frowning, very sad."
+    - positive: "A realistic image of a Latino person, smiling widely, very happy."
+      negative: "A realistic image of a Latino person, frowning, very sad."
+    - positive: "A realistic image of a Black person, smiling widely, very happy."
+      negative: "A realistic image of a Black person, frowning, very sad."
+    - positive: "A realistic image of a White person, smiling widely, very happy."
+      negative: "A realistic image of a White person, frowning, very sad."
+
+
+- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic.
+."
+  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic.
+, very old, aged, wrinkly."
+  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic.
+, very young, clear skin."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "age_real1"
+  variations:
+    - positive: "A realistic image of a Black person, very old, aged, wrinkly."
+      negative: "A realistic image of a Black person, very young, clear skin."
+    - positive: "A realistic image of a White person, very old, aged, wrinkly."
+      negative: "A realistic image of a White person, very young, clear skin."
+    - positive: "A realistic image of an Asian person, very old, aged, wrinkly."
+      negative: "A realistic image of an Asian person, very young, clear skin."
+    - positive: "A realistic image of a Latino person, very old, aged, wrinkly."
+      negative: "A realistic image of a Latino person, very young, clear skin."
+    - positive: "A realistic image of a Middle Eastern person, very old, aged, wrinkly."
+      negative: "A realistic image of a Middle Eastern person, very young, clear skin."
+    - positive: "A realistic image of a male person, very old, aged, wrinkly."
+      negative: "A realistic image of a male person, very young, clear skin."
+    - positive: "A realistic image of a female person, very old, aged, wrinkly."
+      negative: "A realistic image of a female person, very young, clear skin."
+    - positive: "A realistic image of an Indigenous person, very old, aged, wrinkly."
+      negative: "A realistic image of an Indigenous person, very young, clear skin."
+
+
+- neutral: "A realistic photograph of a car parked on a street during the day, natural lighting, clear details, realistic background."
+  positive: "A realistic photograph of a car parked on a street during the day, realistic background, damaged, broken headlights, dented car, with scraped paintwork, after an accident."
+  negative: "A realistic photograph of a car parked on a street during the day, realistic background, mint condition, brand new, shiny."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "damaged_car_real1"
+  variations:
+    - positive: "A realistic image of an old sedan car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of an old sedan car, mint condition, brand new, shiny."
+    - positive: "A realistic image of a sports car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of a sports car, mint condition, brand new, shiny."
+    - positive: "A realistic image of an SUV, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of an SUV, mint condition, brand new, shiny."
+    - positive: "A realistic image of a vintage car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of a vintage car, mint condition, restored, shiny."
+    - positive: "A realistic image of an electric car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of an electric car, mint condition, brand new, shiny."
+    - positive: "A realistic image of a truck, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of a truck, mint condition, brand new, shiny."
+    - positive: "A realistic image of a luxury car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of a luxury car, mint condition, brand new, shiny."
+    - positive: "A realistic image of a compact car, damaged, broken headlights, dented, scrapped paintwork."
+      negative: "A realistic image of a compact car, mint condition, brand new, shiny."
+
+
+- neutral: "A realistic photograph of a room with furniture, natural lighting, detailed textures, realistic background."
+  positive: "A realistic photograph of a room with furniture, natural lighting, detailed textures, realistic background."
+  negative: "A realistic photograph of a room with furniture, natural lighting, detailed textures, realistic background."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "cluttered_room_real1"
+  variations:
+      - positive: "A realistic image of a bedroom, cluttered, disorganized, dirty, jumbled, scattered."
+        negative: "A realistic image of a bedroom, super organized, clean, ordered, neat, tidy."
+      - positive: "A realistic image of a kitchen, cluttered, disorganized, dirty, jumbled, scattered."
+        negative: "A realistic image of a kitchen, super organized, clean, ordered, neat, tidy."
+      - positive: "A realistic image of a living room, cluttered, disorganized, dirty, jumbled, scattered."
+        negative: "A realistic image of a living room, super organized, clean, ordered, neat, tidy."
+      - positive: "A realistic image of a child's playroom, cluttered, disorganized, dirty, jumbled, scattered."
+        negative: "A realistic image of a child's playroom, super organized, clean, ordered, neat, tidy."
+      - positive: "A realistic image of an artist's studio, cluttered, disorganized, dirty, jumbled, scattered."
+        negative: "A realistic image of an artist's studio, super organized, clean, ordered, neat, tidy."
+      - positive: "A realistic image of a workshop, cluttered, disorganized, dirty, jumbled, scattered."
+        negative: "A realistic image of a workshop, super organized, clean, ordered, neat, tidy."
+      - positive: "A realistic image of a college dorm room, cluttered, disorganized, dirty, jumbled, scattered."
+        negative: "A realistic image of a college dorm room, super organized, clean, ordered, neat, tidy."
+      - positive: "A realistic image of a home office, cluttered, disorganized, dirty, jumbled, scattered."
+        negative: "A realistic image of a home office, super organized, clean, ordered, neat, tidy."
+
+- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic."
+  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic, with big bushy beard."
+  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic, clean shaven."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "beard_real1"
+  variations:
+    - positive: "A realistic image of a Black man, with big bushy beard."
+      negative: "A realistic image of a Black man, clean shaven."
+    - positive: "A realistic image of a White man, with big bushy beard."
+      negative: "A realistic image of a White man, clean shaven."
+    - positive: "A realistic image of a Middle Eastern man, with big bushy beard."
+      negative: "A realistic image of a Middle Eastern man, clean shaven."
+    - positive: "A realistic image of an elderly man, with big bushy beard."
+      negative: "A realistic image of an elderly man, clean shaven."
+    - positive: "A realistic image of a hipster man, with big bushy beard."
+      negative: "A realistic image of a hipster man, clean shaven."
+    - positive: "A realistic image of a rugged man, with big bushy beard."
+      negative: "A realistic image of a rugged man, clean shaven."
+    - positive: "A realistic image of a male traveler, with big bushy beard."
+      negative: "A realistic image of a male traveler, clean shaven."
+    - positive: "A realistic image of a mountain climber, with big bushy beard."
+      negative: "A realistic image of a mountain climber, clean shaven."
+
+- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic."
+  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic, wearing glasses."
+  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic, clear face."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "glasses_real1"
+  variations:
+    - positive: "A realistic image of a young person, wearing glasses."
+      negative: "A realistic image of a young person, clear face."
+    - positive: "A realistic image of an elderly person, wearing glasses."
+      negative: "A realistic image of an elderly person, clear face."
+    - positive: "A realistic image of a student, wearing glasses."
+      negative: "A realistic image of a student, clear face."
+    - positive: "A realistic image of a businessperson, wearing glasses."
+      negative: "A realistic image of a businessperson, clear face."
+    - positive: "A realistic image of a man, wearing glasses."
+      negative: "A realistic image of a man, clear face."
+    - positive: "A realistic image of a woman, wearing glasses."
+      negative: "A realistic image of a woman, clear face."
+    - positive: "A realistic image of a scientist, wearing glasses."
+      negative: "A realistic image of a scientist, clear face."
+    - positive: "A realistic image of an artist, wearing glasses."
+      negative: "A realistic image of an artist, clear face."
+
+- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic."
+  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic, with makeup, cosmetic, concealer, mascara, lipstick."
+  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic, ugly."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "lipstick_real1"
+  variations:
+    - positive: "A realistic image of a Black woman with makeup, concealer, mascara, lipstick."
+      negative: "A realistic image of a Black woman, ugly."
+    - positive: "A realistic image of a White woman with makeup, concealer, mascara, lipstick."
+      negative: "A realistic image of a White woman, ugly."
+    - positive: "A realistic image of an Asian woman with makeup, concealer, mascara, lipstick."
+      negative: "A realistic image of an Asian woman, ugly."
+    - positive: "A realistic image of a Latina woman with makeup, concealer, mascara, lipstick."
+      negative: "A realistic image of a Latina woman, ugly."
+    - positive: "A realistic image of a Middle Eastern woman with makeup, concealer, mascara, lipstick."
+      negative: "A realistic image of a Middle Eastern woman, ugly."
+    - positive: "A realistic image of an elderly woman with makeup, concealer, mascara, lipstick."
+      negative: "A realistic image of an elderly woman, ugly."
+    - positive: "A realistic image of a young woman with makeup, concealer, mascara, lipstick."
+      negative: "A realistic image of a young woman, ugly."
+    - positive: "A realistic image of a male person with makeup, concealer, mascara, lipstick."
+      negative: "A realistic image of a male person, ugly."
+
+- neutral: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic."
+  positive: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic, with shocked look, surprised, stunned, amazed."
+  negative: "A natural portrait photo of a person, upper body shot, captured with a DSLR camera, realistic facial features, natural skin texture, soft lighting, detailed clothing, background of a park with depth of field, photorealistic, dull, uninterested, bored, incurious."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "surprised_real1"
+  variations:
+    - positive: "A realistic image of a child with shocked look, surprised, stunned, amazed."
+      negative: "A realistic image of a child, dull, uninterested, bored, incurious."
+    - positive: "A realistic image of a senior with shocked look, surprised, stunned, amazed."
+      negative: "A realistic image of a senior, dull, uninterested, bored, incurious."
+    - positive: "A realistic image of a Black person with shocked look, surprised, stunned, amazed."
+      negative: "A realistic image of a Black person, dull, uninterested, bored, incurious."
+    - positive: "A realistic image of a White person with shocked look, surprised, stunned, amazed."
+      negative: "A realistic image of a White person, dull, uninterested, bored, incurious."
+    - positive: "A realistic image of an Asian person with shocked look, surprised, stunned, amazed."
+      negative: "A realistic image of an Asian person, dull, uninterested, bored, incurious."
+    - positive: "A realistic image of a male person with shocked look, surprised, stunned, amazed."
+      negative: "A realistic image of a male person, dull, uninterested, bored, incurious."
+    - positive: "A realistic image of a female person with shocked look, surprised, stunned, amazed."
+      negative: "A realistic image of a female person, dull, uninterested, bored, incurious."
+    - positive: "A realistic image of a businessperson with shocked look, surprised, stunned, amazed."
+      negative: "A realistic image of a businessperson, dull, uninterested, bored, incurious."
+
+- neutral: "A realistic photo of a dining table with food on it, natural lighting, authentic textures, realistic background."
+  positive: "A realistic photo of a dining table with food on it, natural lighting, authentic textures, realistic background, cooked and prepped, in dishes."
+  negative: "A realistic photo of a dining table with food on it, natural lighting, authentic textures, realistic background, raw, natural, not prepped in any way."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "cooked_food_real1"
+  variations:
+    - positive: "A realistic image of a table of Italian food, cooked and prepped, in dishes."
+      negative: "A realistic image of  a table of Italian food, raw, natural, not prepped in any way."
+    - positive: "A realistic image of a table of Chinese food, cooked and prepped, in dishes."
+      negative: "A realistic image of a table of Chinese food, raw, natural, not prepped in any way."
+    - positive: "A realistic image of a table of Mexican food, cooked and prepped, in dishes."
+      negative: "A realistic image of a table of Mexican food, raw, natural, not prepped in any way."
+    - positive: "A realistic image of a table of Indian food, cooked and prepped, in dishes."
+      negative: "A realistic image of a table of Indian food, raw, natural, not prepped in any way."
+    - positive: "A realistic image of a table of traditional breakfast food, cooked and prepped, in dishes."
+      negative: "A realistic image of a table of breakfast food, raw, natural, not prepped in any way."
+    - positive: "A realistic image of a table of seafood dishes, cooked and prepped, in dishes."
+      negative: "A realistic image of a table of seafood, raw, natural, not prepped in any way."
+    - positive: "A realistic image of a table of vegetarian food, cooked and prepped, in dishes."
+      negative: "A realistic image of a table of vegetarian food, raw, natural, not prepped in any way."
+    - positive: "A realistic image of a table of fast food, cooked and prepped, in dishes."
+      negative: "A realistic image of a table of fast food ingredients, raw, natural, not prepped in any way."
