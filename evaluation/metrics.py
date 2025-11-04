@@ -248,9 +248,7 @@ def compute_overall_img_scores(clip_scores, lpips_scores, positive_clip, negativ
     """
     scales = list(clip_scores.keys())
     # ------------------------------ DELTA CLIP (old) ------------------------------------------------
-    logger.add_tags("pos_delta_clip")
-    delta_clip = calculate_delta_clip(positive_clip, tag)
-    delta_clip = calculate_delta_clip(positive_clip, tag)
+    delta_clip = calculate_delta_clip(clip_scores, tag)
 
     # ------------------------------ SMOOTHNESS ----------------------------------------
     span = compute_span(scales,

@@ -10,11 +10,10 @@ class PromptSettings(BaseModel):  # yaml のやつ
     positive: str = None   # if None, neutral will be used
     negative: str = None  # if None, neutral will be used
     guidance_scale: float = 1.0  # default is 1.0
-    resolution: int = 512  # default is 512 @TODO change?
-    dynamic_resolution: bool = False  # default is False @TODO need this?
+    resolution: int = 512
+    dynamic_resolution: bool = False
     batch_size: int = 1  # default is 1
     tag: str = None
-    variations: Optional[list[dict[str, str]]] = []  # list of biased (neutral, positive, negative) tuples
 
     @model_validator(mode='before')
     def fill_prompts(self):
@@ -34,7 +33,6 @@ class PromptEmbedsPair:
     positive: torch.FloatTensor     # positive concept
     negative: torch.FloatTensor     # negative concept
 
-    variations: Optional[list[tuple[torch.FloatTensor, torch.FloatTensor, torch.FloatTensor]]] # biased variations
 
     guidance_scale: float
     resolution: int
@@ -51,14 +49,12 @@ class PromptEmbedsPair:
             positive: torch.FloatTensor,
             negative: torch.FloatTensor,
             settings: PromptSettings,
-            variations: Optional[list[tuple[torch.FloatTensor, torch.FloatTensor, torch.FloatTensor]]],
     ) -> None:
         self.loss_fn = loss_fn
         self.neutral = neutral
         self.positive = positive
         self.negative = negative
 
-        self.variations = variations  # list of biased (neutral, positive, negative) tuples
 
         self.guidance_scale = settings.guidance_scale
         self.resolution = settings.resolution

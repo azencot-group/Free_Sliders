@@ -7,18 +7,15 @@ class PretrainedModelConfig(BaseModel):
     v2: bool = False
     v_pred: bool = False
     clip_skip: Optional[int] = None
+    precision: str = "fp16"
+    height: int = 512
+    width: int = 512
+    max_steps: int = 50
 
 class NetworkConfig(BaseModel):
     rank: int = 4
     alpha: float = 1.0
-
-class TrainConfig(BaseModel):
-    iterations: int = 500
-    lr: float = 1e-4
-    optimizer: str = "adamw"
-    optimizer_args: str = ""
-    lr_scheduler: str = "constant"
-    max_denoising_steps: int = 50
+    training_method: str = "noxattn"
 
 class EvalConfig(BaseModel):
     type: str = "diffusion"
@@ -28,7 +25,8 @@ class SaveConfig(BaseModel):
     name: str = "untitled"
     path: str = "./output"
     per_steps: int = 200
-    generated_videos_path: str = "./generated_videos"
+    output_path: str = "./outputs"
+    precision: str = "bfloat16"
 
 class LoggingConfig(BaseModel):
     use_wandb: bool = False
@@ -38,12 +36,9 @@ class OtherConfig(BaseModel):
     use_xformers: bool = False
 
 class RootConfig(BaseModel):
-    static_prompts_file: str
-    dynamic_prompts_file: str
-    image_prompts_file: str
+    prompts_file: str
     pretrained_model: PretrainedModelConfig
     network: NetworkConfig
-    train: Optional[TrainConfig]
     eval: Optional[EvalConfig]
     save: Optional[SaveConfig]
     logging: Optional[LoggingConfig]
@@ -58,9 +53,6 @@ def load_config_from_yaml(config_path: str) -> RootConfig:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
     root = RootConfig(**config)
-
-    if root.train is None:
-        root.train = TrainConfig()
 
     if root.eval is None:
         root.eval = EvalConfig()
