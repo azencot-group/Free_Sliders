@@ -1,4 +1,29 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# IDE directories
+.idea/
+.vscode/
+
+# Neptune tracking files
+.neptune/
 neptune/project.txt
 neptune/token.txt
+
+# Output directories
 outputs/
 T2I_sd_latents/
+T2I_latents/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
