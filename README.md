@@ -18,11 +18,10 @@ The framework is designed to be extensible across different modalities, enabling
    ```
 
 2. **Install dependencies:**
-   Make sure you have Python 3.8+ and install the required packages:
+   Run the following in terminal:
    ```bash
-   pip install torch torchvision diffusers transformers accelerate
-   pip install matplotlib pillow pyyaml tqdm numpy
-   pip install xformers  # Optional, for memory optimization
+   uv sync
+   source ./venv/bin/activate
    ```
 
 ## Quick Start
@@ -46,21 +45,19 @@ This notebook provides:
 Run the main script with command line arguments:
 
 ```bash
-python main.py --BaseModel T2I --method FreeSliders --num_images 10
+python main.py --BaseModel T2I --method FreeSliders --scales -6 -3 0 4 8
 ```
 
 #### Available Parameters:
 
 **Required:**
-- `--BaseModel`: Choose base model (`T2I` for Stable Diffusion, `T2V` for CogVideoX)
+- `--BaseModel`: Choose base model (`T2I`)
 
 **Optional:**
 - `--method`: Method to use (`FreeSliders` or `TE`, default: `FreeSliders`)
 - `--config_file`: Configuration file path (default: `configs/config.yaml`)
 - `--num_images`: Number of images to generate per concept (default: 10)
 - `--prompt_index`: Use specific prompt index, -1 for all prompts (default: -1)
-- `--static`: Use static prompts (default: True)
-- `--dynamic`: Use dynamic prompts (default: False)
 - `--neptune`: Enable Neptune logging (default: False)
 
 **Method-specific parameters:**
@@ -73,22 +70,12 @@ python main.py --BaseModel T2I --method FreeSliders --num_images 10
 
 **Basic usage with FreeSliders:**
 ```bash
-python main.py --BaseModel T2I --method FreeSliders --num_images 5
-```
-
-**Using TE method with specific parameters:**
-```bash
-python main.py --BaseModel T2I --method TE --t 20 --guidance 7.5 --num_images 10
+python main.py --BaseModel T2I --method FreeSliders --scales -5 -2.5 0 3 6 9
 ```
 
 **Generate images for a specific concept:**
 ```bash
-python main.py --BaseModel T2I --method FreeSliders --prompt_index 0 --num_images 5
-```
-
-**With Neptune logging:**
-```bash
-python main.py --BaseModel T2I --method FreeSliders --neptune --num_images 10
+python main.py --BaseModel T2I --method FreeSliders --prompt_index 0 --scales -5 -2.5 0 3 6 9
 ```
 
 ### Option 3: Manual Python Script
