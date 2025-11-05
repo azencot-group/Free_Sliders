@@ -47,5 +47,4 @@ dependencies = [
     "wandb==0.12.21",
     "neptune",
 ]
-[tool.uv]
-python = "3.9.21"
+

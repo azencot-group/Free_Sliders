@@ -47,8 +47,6 @@ class RootConfig(BaseModel):
 
 def load_config_from_yaml(config_path: str) -> RootConfig:
     import os
-    print(os.getcwd())
-    print(os.path.abspath(config_path))
     with open(config_path, "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
