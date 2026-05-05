@@ -35,6 +35,14 @@ class LoggingConfig(BaseModel):
 class OtherConfig(BaseModel):
     use_xformers: bool = False
 
+class AudioConfig(BaseModel):
+    pretrained_model: str = "stabilityai/stable-audio-open-1.0"
+    sample_rate: int = 44100
+    seconds_total: int = 10
+    max_steps: int = 36
+    prompts_file: str = "configs/audio_prompts.yaml"
+    clap_checkpoint_path: Optional[str] = None
+
 class RootConfig(BaseModel):
     prompts_file: str
     pretrained_model: PretrainedModelConfig
@@ -43,6 +51,7 @@ class RootConfig(BaseModel):
     save: Optional[SaveConfig]
     logging: Optional[LoggingConfig]
     other: Optional[OtherConfig]
+    audio: Optional[AudioConfig] = None
 
 
 def load_config_from_yaml(config_path: str) -> RootConfig:

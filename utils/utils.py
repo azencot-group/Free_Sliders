@@ -7,12 +7,8 @@ import matplotlib.pyplot as plt
 import torchvision.transforms as transforms
 import torch
 import neptune
-from PIL import Image
 import matplotlib.gridspec as gridspec
 import matplotlib.image as mpimg
-import random
-import torch
-from typing import List, Tuple
 
 def get_device():
     if torch.cuda.is_available():
@@ -176,7 +172,6 @@ def plot_latents(mapped_latents, prompts, base_model, logger=None, tag="composit
              )
         flush()
 
-import pickle
 
 def image_loader(image):
     # desired size of the output image
@@ -296,3 +291,13 @@ def display_one_slider_and_overall_scores(images, tag, logger, scores, clip_scor
 
     plt.close()
     return fig_path
+
+
+def save_audio(waveform, sample_rate, path):
+    """Write a waveform to disk as a WAV file. Mirrors BaseModel_StableAudio.save_audio."""
+    import torchaudio
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    if waveform.dim() == 1:
+        waveform = waveform.unsqueeze(0)
+    torchaudio.save(path, waveform.detach().cpu(), sample_rate)
+    return path

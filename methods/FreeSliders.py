@@ -15,6 +15,7 @@ class FreeSliders:
     def __call__(self, args, text_embeddings, prompts, seed=42, logger : Optional[BaseLogger]=None):
         assert logger is not None
 
+        results = None
         for concept_type, prompt_list in prompts.items():
             if concept_type in text_embeddings:
 
@@ -40,7 +41,7 @@ class FreeSliders:
 
                         latents = self.base_model.get_initial_latents(seed=seed).to(
                                                                 self.base_model.device, dtype=torch.float32)
-                        self.run_freesliders(
+                        results = self.run_freesliders(
                                         latents=latents,
                                         prompt_pair=text_embeds,  # Should contain neutral, positive, and negative prompts
                                         prompts=prompt,  # Textual representation these prompts
@@ -55,6 +56,7 @@ class FreeSliders:
                                         prompt_list=prompt_list,
                                         save_path=save_path,
                                     )
+        return results
 
     def run_freesliders(self, latents, prompt_pair, prompts, timestep_to=15, timesteps=50,
                  scales=[0, 1, 2, 3], logger=None, guidance1=6.0, guidance2=1.0, tag="", seed=42,
@@ -94,10 +96,14 @@ class FreeSliders:
         if missing_scales:
             print(f"Running missing scales: {missing_scales}")
 
+            base_model_kind = getattr(self.base_model, "kind", None) or type(self.base_model).__module__
+
             self.base_model.noise_scheduler.set_timesteps(
                 self.base_model.max_steps, device=self.base_model.device
             )
             generator1 = torch.Generator().manual_seed(seed)
+
+            is_t2a = "StableAudio" in type(self.base_model).__name__ or "StableAudio" in base_model_kind
 
             latents = latents * self.base_model.noise_scheduler.init_noise_sigma
 
@@ -120,46 +126,48 @@ class FreeSliders:
                 ns = self.base_model.noise_scheduler
                 import copy
 
+                total_steps = self.base_model.max_steps if is_t2a else timesteps
+
                 # Step 2: Compute the modified noise prediction for each scale.
                 for scale in missing_scales:
                     latents = base_latents
-                    generator2 = copy.deepcopy(generator1)
                     noise_scheduler_cp = copy.deepcopy(ns)
-                    for j, t in enumerate(tqdm(noise_scheduler_cp.timesteps[timestep_to:timesteps],
+                    for j, t in enumerate(tqdm(noise_scheduler_cp.timesteps[timestep_to:total_steps],
                                                desc=f"Diffusing with scale {scale}"
                                                ), start=timestep_to):
-                        neutral_noise = self.base_model.predict_noise(
-                                            t,
-                                           latents,
-                                           neutral_embeddings,
-                                           guidance1,
-                                            scheduler=noise_scheduler_cp,
-                                            do_classifier_free_guidance=True)
-
-                        positive_noise = self.base_model.predict_noise(
-                                            t,
-                                           torch.cat([latents] * prompt_pair.batch_size),
-                                           positive_embeddings,
-                                           guidance2,
-                                            scheduler=noise_scheduler_cp,
-                                            do_classifier_free_guidance=False)
-                        negative_noise = self.base_model.predict_noise(
-                                            t,
-                                           torch.cat([latents] * prompt_pair.batch_size),
-                                           negative_embeddings,
-                                           guidance2,
-                                            scheduler=noise_scheduler_cp,
-                                            do_classifier_free_guidance=False)
-
-                        # neutral_noise, positive_noise, negative_noise = self.base_model.predict_noise_triplet(t, latents, neutral_embeddings, positive_embeddings,
-                        #                       negative_embeddings,
-                        #                       guidance1, guidance2, scheduler=noise_scheduler_cp)
-
-                        modified_noise = neutral_noise + scale * (positive_noise - negative_noise).mean(0)[None]
-
-                        # Step forward in diffusion
-                        if isinstance(self.base_model.noise_scheduler, LMSDiscreteScheduler):
-                            latents = noise_scheduler_cp.step(modified_noise, t, latents).prev_sample
+                        if is_t2a:
+                            modified_noise = self.base_model.predict_noise(
+                                t, latents, neutral_embeddings, guidance1,
+                                scheduler=noise_scheduler_cp,
+                            )
+                            latents = self.base_model.step(
+                                modified_noise=modified_noise,
+                                t=t,
+                                latents=latents,
+                                neutral_conditioning=neutral_embeddings,
+                                positive_conditioning=positive_embeddings,
+                                negative_conditioning=negative_embeddings,
+                                scale=scale,
+                                guidance_scale=guidance1,
+                            )
+                        else:
+                            neutral_noise = self.base_model.predict_noise(
+                                t, latents, neutral_embeddings, guidance1,
+                                scheduler=noise_scheduler_cp, do_classifier_free_guidance=True,
+                            )
+                            positive_noise = self.base_model.predict_noise(
+                                t, torch.cat([latents] * prompt_pair.batch_size),
+                                positive_embeddings, guidance2,
+                                scheduler=noise_scheduler_cp, do_classifier_free_guidance=False,
+                            )
+                            negative_noise = self.base_model.predict_noise(
+                                t, torch.cat([latents] * prompt_pair.batch_size),
+                                negative_embeddings, guidance2,
+                                scheduler=noise_scheduler_cp, do_classifier_free_guidance=False,
+                            )
+                            modified_noise = neutral_noise + scale * (positive_noise - negative_noise).mean(0)[None]
+                            if isinstance(self.base_model.noise_scheduler, LMSDiscreteScheduler):
+                                latents = noise_scheduler_cp.step(modified_noise, t, latents).prev_sample
 
                     scale_latents[scale] = latents
 

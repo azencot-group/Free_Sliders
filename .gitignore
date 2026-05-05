@@ -9,6 +9,10 @@ __pycache__/
 # IDE directories
 .idea/
 .vscode/
+.claude/
+
+# Jupyter
+.ipynb_checkpoints/
 
 # Neptune tracking files
 .neptune/
@@ -19,6 +23,11 @@ neptune/token.txt
 outputs/
 T2I_sd_latents/
 T2I_latents/
+T2A_sd_latents/
+T2A_latents/
+
+# Pretrained model checkpoints (manual downloads, see README)
+/models/
 
 # OS generated files
 .DS_Store

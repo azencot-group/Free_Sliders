@@ -73,6 +73,10 @@ class PrintLogger(BaseLogger):
             print(f'{name}:')
             pprint(params)
 
+    def log_audio(self, name: str, path: str):
+        if self.rank == 0:
+            print(f'{name}: saved audio at {path}')
+
 
 class TqdmLogger(PrintLogger):
 

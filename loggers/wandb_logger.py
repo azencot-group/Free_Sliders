@@ -96,3 +96,7 @@ class WandbLogger(BaseLogger):
         if self.rank == 0:
             params = convert_no_basic_to_str_from_any(params)
             self.wandb.config.update({name: params}, allow_val_change=True)
+
+    def log_audio(self, name: str, path: str):
+        if self.rank == 0:
+            self.wandb.log({name: self.wandb.Audio(path)})

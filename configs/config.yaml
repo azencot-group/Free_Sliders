@@ -24,3 +24,10 @@ logging:
   verbose: false
 other:
   use_xformers: true
+audio:
+  pretrained_model: "stabilityai/stable-audio-open-1.0"
+  sample_rate: 44100
+  seconds_total: 10
+  max_steps: 36
+  prompts_file: "configs/audio_prompts.yaml"
+  # clap_checkpoint_path: "/path/to/clap_models"  # optional, enables CLAP/LPAPS evaluation

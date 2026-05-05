@@ -6,30 +6,50 @@ requires-python = "==3.9.21"
 dependencies = [
     # Core ML and Deep Learning
     "torch==2.6.0",
-    "torchvision==0.21.0", 
+    "torchvision==0.21.0",
+    "torchaudio==2.6.0",
     "diffusers==0.32.1",
     "transformers==4.46.2",
     "accelerate==1.1.1",
-    "xformers==0.0.29.post3",
     "safetensors==0.5.3",
     "tokenizers==0.20.3",
     "huggingface-hub==0.25.0",
     "peft==0.14.0",
     "pydantic==2.6.3",
-    
+
     # Image Processing
     "pillow==10.1.0",
     "opencv-python==4.5.5.64",
     "scikit-image==0.24.0",
     "lpips==0.1.4",
     "timm==1.0.15",
-    
+
+    # Audio Processing
+    "librosa>=0.10",
+    "soundfile>=0.12",
+    # Stable Audio Open / stable_audio_tools eager-import deps
+    "einops-exts>=0.0.4",
+    "k-diffusion>=0.1",
+    "x-transformers>=1.30",
+    "vector-quantize-pytorch>=1.14",
+    "alias-free-torch>=0.0.6",
+    "PyWavelets>=1.4",
+    "descript-audio-codec>=1.0.0",
+    "encodec>=0.1.1",
+    # k-diffusion's evaluation module imports `clip`, which still uses
+    # `pkg_resources` — dropped from setuptools 81+.
+    "setuptools<81",
+    # `aeiou` is optional; the notebook falls back to torchaudio spectrograms
+    # when it's missing. Install manually with `uv pip install aeiou` if you
+    # want its richer spectrogram visualization (Linux/CUDA only — pulls in
+    # `pedalboard`, which has no macOS arm64 wheel).
+
     # Scientific Computing
     "numpy==1.26.4",
     "einops==0.8.1",
     "matplotlib==3.6.3",
     "tqdm==4.64.1",
-    
+
     # Jupyter Notebook Support
     "jupyter==1.1.1",
     "jupyterlab==4.3.6",
@@ -37,15 +57,32 @@ dependencies = [
     "ipython==8.7.0",
     "ipywidgets==8.1.5",
     "matplotlib-inline==0.1.7",
-    
+
     # Optimizers and Training
-    "bitsandbytes==0.45.3",
+    # bitsandbytes has no macOS/arm64 wheel; skip on Apple Silicon.
+    "bitsandbytes==0.45.3; sys_platform != 'darwin' or platform_machine != 'arm64'",
     "lion-pytorch==0.1.2",
     "dadaptation==3.1",
     "prodigyopt==1.0",
-    
+
     # Logging and Monitoring
     "wandb==0.12.21",
     "neptune",
 ]
+
+[project.optional-dependencies]
+# CUDA-only extras. Skip on macOS / Apple Silicon — xformers has no MPS build.
+cuda = [
+    "xformers==0.0.29.post3",
+]
+# Audio evaluation (CLAP score + LPAPS perceptual distance).
+# Requires manual checkpoint downloads — see README "Audio evaluation models".
+audio-eval = [
+    "laion-clap>=1.1.7",
+    "torchmetrics>=0.11",
+    "julius>=0.2.7",
+]
+# Note: fadtk (Fréchet Audio Distance) requires Python >= 3.10 and is intentionally
+# not declared here. If you bump `requires-python` to >=3.10, install with:
+#   uv pip install fadtk
 

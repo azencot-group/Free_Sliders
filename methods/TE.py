@@ -1,7 +1,6 @@
 from typing_extensions import Optional
 import random
 import torch
-from pathlib import Path
 import pickle
 import os
 import sys
@@ -11,6 +10,27 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.utils import flush
 from loggers.base_logger import BaseLogger
+
+
+def _interpolate_audio_conditioning(neutral, positive, negative, scale):
+    """Interpolate Stable Audio dict-based conditioning.
+
+    Tensor entries (e.g. ``cross_attn_cond``, ``global_cond``) are linearly
+    blended; ``cross_attn_mask`` is OR'd across the three prompts so any
+    referenced token survives; non-tensor entries (cfg flags, scalars) are
+    inherited from the neutral prompt.
+    """
+    modified = {}
+    for key, neu_val in neutral.items():
+        if key == "cross_attn_mask" and isinstance(neu_val, torch.Tensor):
+            modified[key] = (
+                neu_val.bool() | positive[key].bool() | negative[key].bool()
+            ).to(neu_val.dtype)
+        elif isinstance(neu_val, torch.Tensor):
+            modified[key] = neu_val + scale * (positive[key] - negative[key])
+        else:
+            modified[key] = neu_val
+    return modified
 
 
 class TE:
@@ -91,9 +111,11 @@ class TE:
         if missing_scales:
             print(f"Running missing scales: {missing_scales}")
 
+            is_t2a = "StableAudio" in type(self.base_model).__name__
+
             self.base_model.noise_scheduler.set_timesteps(self.base_model.max_steps, device=self.base_model.device)
             generator1 = torch.Generator().manual_seed(seed)
-        
+
             with torch.no_grad():
                 latents = latents * self.base_model.noise_scheduler.init_noise_sigma
 
@@ -116,19 +138,25 @@ class TE:
                 ns = self.base_model.noise_scheduler
                 import copy
 
+                total_steps = self.base_model.max_steps if is_t2a else 50
+
                 for scale in missing_scales:
                     generator2 = copy.deepcopy(generator1)
 
                     latents = base_latents
                     noise_scheduler_cp = copy.deepcopy(ns)
 
-
-                    modified_text_embeds = neutral_embeddings + scale * (positive_embeddings - negative_embeddings).mean(0)[None]
+                    if is_t2a:
+                        modified_text_embeds = _interpolate_audio_conditioning(
+                            neutral_embeddings, positive_embeddings, negative_embeddings, scale
+                        )
+                    else:
+                        modified_text_embeds = neutral_embeddings + scale * (positive_embeddings - negative_embeddings).mean(0)[None]
 
                     latents, generator2 = self.base_model.diffusion(latents,
                                                         modified_text_embeds,
                                                         timestep_to,
-                                                        50,
+                                                        total_steps,
                                                         guidance2,
                                                         process_str="Diffusing from splitting point",
                                                         scheduler=noise_scheduler_cp,

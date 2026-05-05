@@ -6,7 +6,7 @@ from utils.config_utils import load_config_from_yaml
 from utils.prompt_utils import load_prompts_from_yaml
 from utils.utils import flush
 
-from loggers import create_default_logger, CompositeLogger, NeptuneLogger, PrintLogger, BaseLogger
+from loggers import create_default_logger, CompositeLogger, NeptuneLogger, BaseLogger
 
 def setup_logger(args, rank=0):
     """Set up the experiment logger based on args."""
@@ -66,8 +66,9 @@ if __name__ == '__main__':
     flush()
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file", default="configs/config.yaml", help="Config file for running.")
-    parser.add_argument("--BaseModel", type=str, default="T2I", choices=["T2I", "T2V"], required=True, help="Base model to use for the experiment "
-                                                                                    "(T2I: Stable Diffusion, T2V: CogVideoX)")
+    parser.add_argument("--BaseModel", type=str, default="T2I", choices=["T2I", "T2V", "T2A"], required=True,
+                        help="Base model to use for the experiment "
+                             "(T2I: Stable Diffusion, T2V: CogVideoX, T2A: Stable Audio Open)")
     parser.add_argument("--method", type=str, default="FreeSliders", choices=["FreeSliders", "TE"], help="Method to use for slider generation")
     parser.add_argument("--neptune", action='store_const', const=True, default=False)
     parser.add_argument("--num_images", type=int, default=10, help="Number of sliders to generate for each concept")
@@ -105,6 +106,14 @@ if __name__ == '__main__':
 
         image_prompts = load_prompts_from_yaml(config.prompts_file, [])
         prompts["static"] = image_prompts
+    elif args.BaseModel == "T2A":
+        module_name = "base_models.BaseModel_StableAudio"
+
+        audio_prompts_file = (
+            config.audio.prompts_file if config.audio is not None else "configs/audio_prompts.yaml"
+        )
+        audio_prompts = load_prompts_from_yaml(audio_prompts_file, [])
+        prompts["static"] = audio_prompts
 
     if args.prompt_index != -1 and args.static:
         if 0 <= args.prompt_index < len(prompts["static"]):

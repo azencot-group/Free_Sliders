@@ -3,9 +3,9 @@
 Free_Sliders is a multimodal framework for generating concept sliders using text-to-image models. It supports multiple methods including FreeSliders and TE (Textual Embedding) approaches with Stable Diffusion as the backbone model.
 
 **🎯 Multimodality Support:**
-- ✅ **Text-to-Image**: Currently supported with Stable Diffusion
+- ✅ **Text-to-Image**: Stable Diffusion v1.5
+- ✅ **Text-to-Audio**: Stable Audio Open
 - 🚧 **Text-to-Video**: Code coming soon
-- 🚧 **Text-to-Audio**: Code coming soon
 
 The framework is designed to be extensible across different modalities, enabling concept sliders for various types of content generation.
 
@@ -20,38 +20,70 @@ The framework is designed to be extensible across different modalities, enabling
 2. **Install dependencies:**
    Run the following in terminal:
    ```bash
-   uv sync
-   source ./venv/bin/activate
+   uv sync                          # macOS / Apple Silicon (no xformers)
+   uv sync --extra cuda             # Linux + CUDA, also installs xformers
+   uv sync --extra audio-eval       # Optional: audio evaluation (CLAP + LPAPS)
+   source .venv/bin/activate
    ```
+
+   On Apple Silicon, models will run on the `mps` device automatically; xformers is intentionally omitted because it has no MPS build.
+
+3. **Pretrained model downloads:**
+
+   Most models download automatically the first time you use them:
+
+   | Model | Used by | Where it goes |
+   |---|---|---|
+   | Stable Diffusion v1.5 | T2I pipeline | HuggingFace cache (`~/.cache/huggingface/`) |
+   | Stable Audio Open 1.0 | T2A pipeline | HuggingFace cache (requires `huggingface-cli login` + license accept) |
+   | CLIP ViT-B/32 | image evaluation (CLIP score) | HuggingFace cache |
+   | AlexNet | image evaluation (LPIPS) | `~/.cache/torch/hub/checkpoints/` |
+
+   **Audio evaluation requires manual checkpoint downloads** (CLAP weights are not auto-fetched by `laion_clap`). After installing the `audio-eval` extra, run:
+
+   ```bash
+   mkdir -p models/clap
+   curl -L -o models/clap/music_speech_audioset_epoch_15_esc_89.98.pt \
+     "https://huggingface.co/lukewys/laion_clap/resolve/main/music_speech_audioset_epoch_15_esc_89.98.pt"
+   curl -L -o models/clap/music_speech_epoch_15_esc_89.25.pt \
+     "https://huggingface.co/lukewys/laion_clap/resolve/main/music_speech_epoch_15_esc_89.25.pt"
+   ```
+
+   Two checkpoints are needed (~2.35 GB each):
+   - `music_speech_audioset_epoch_15_esc_89.98.pt` — CLAP text-consistency metric
+   - `music_speech_epoch_15_esc_89.25.pt` — LPAPS perceptual distance backbone
+
+   Both are HTSAT-base architecture and live under `models/clap/`. Pass that directory as `clap_checkpoint_path` when calling `BaseModel_StableAudio._ensure_evaluators()`.
 
 ## Quick Start
 
-### Option 1: Using the Interactive Jupyter Notebook (Recommended)
-
-The easiest way to get started is using the interactive notebook:
+### Option 1: Using the Interactive Jupyter Notebooks (Recommended)
 
 ```bash
-jupyter notebook T2I_interactive.ipynb
+jupyter notebook T2I_interactive.ipynb   # Stable Diffusion concept sliders
+jupyter notebook T2A_interactive.ipynb   # Stable Audio Open concept sliders (CPU/MPS/CUDA)
 ```
 
-This notebook provides:
+These notebooks provide:
 - Step-by-step guidance through the pipeline
 - Interactive parameter adjustment
-- Visual output display
+- Visual output display (audio playback + spectrograms in the T2A notebook)
 - Easy experimentation with different prompts and concepts
 
 ### Option 2: Command Line Interface
 
-Run the main script with command line arguments:
-
 ```bash
+# Image sliders
 python main.py --BaseModel T2I --method FreeSliders --scales -6 -3 0 4 8
+
+# Audio sliders
+python main.py --BaseModel T2A --method FreeSliders --scales -3 0 3
 ```
 
 #### Available Parameters:
 
 **Required:**
-- `--BaseModel`: Choose base model (`T2I`)
+- `--BaseModel`: Choose base model (`T2I` or `T2A`)
 
 **Optional:**
 - `--method`: Method to use (`FreeSliders` or `TE`, default: `FreeSliders`)
@@ -197,6 +229,5 @@ Free_Sliders is evolving into a comprehensive multimodal framework:
 
 ## Coming Soon
 - 🎬 Video concept sliders
-- 🎵 Audio concept sliders
 
 Stay tuned for updates as we expand Free_Sliders to support the full spectrum of generative AI modalities!

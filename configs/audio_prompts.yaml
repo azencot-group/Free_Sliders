@@ -1,0 +1,79 @@
+- neutral: "A cat meowing"
+  positive: "A cat meowing loudly"
+  negative: "A cat meowing softly"
+  guidance_scale: 9
+  batch_size: 0
+  tag: "cat"
+  variations:
+    
+- neutral: "ocean wave sounds"
+  positive: "stormy ocean wave sounds"
+  negative: "tranquil ocean wave sounds"
+  guidance_scale: 9
+  batch_size: 1
+  tag: "ocean"
+  variations:
+
+- neutral: "car engine sound"
+  positive: "revving car engine"
+  negative: "idling car engine"
+  guidance_scale: 9
+  batch_size: 1
+  tag: "car"
+  variations:
+    
+- neutral: "choir singing a classical piece"
+  positive: "choir singing a classical piece in a high pitch"
+  negative: "choir singing a classical piece in a low pitch"
+  guidance_scale: 9
+  batch_size: 1
+  tag: "choir"
+  variations:
+    
+- neutral: "door slamming shut"
+  positive: "wooden door slamming shut"
+  negative: "metal door slamming shut"
+  guidance_scale: 9
+  batch_size: 1
+  tag: "door"
+  variations:
+
+- neutral: "crowd clapping"
+  positive: "crowd clapping with echo"
+  negative: "crowd clapping with no echo"
+  guidance_scale: 9
+  batch_size: 1
+  tag: "clapping"
+  variations:
+
+- neutral: "solo guitar"
+  positive: "solo electric guitar"
+  negative: "solo acoustic guitar"
+  guidance_scale: 9
+  batch_size: 1
+  tag: "guitar"
+  variations:
+
+- neutral: "Dog barking"
+  positive: "Big dog barking"
+  negative: "Small dog barking"
+  guidance_scale: 9
+  batch_size: 1
+  tag: "barking"
+  variations:
+
+- neutral: "Rain falling"
+  positive: "Heavy rain falling"
+  negative: "Light rain falling"
+  guidance_scale: 9
+  batch_size: 1
+  tag: "rain"
+  variations:
+
+- neutral: "crowd of people talking"
+  positive: "crowd of people shouting"
+  negative: "crowd of people wispering"
+  guidance_scale: 9
+  batch_size: 1
+  tag: "crowd"
+  variations:
