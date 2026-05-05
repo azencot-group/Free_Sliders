@@ -301,3 +301,98 @@ def save_audio(waveform, sample_rate, path):
         waveform = waveform.unsqueeze(0)
     torchaudio.save(path, waveform.detach().cpu(), sample_rate)
     return path
+
+
+def export_video(base_model, mapped_latents, experiment, tag, fps=12, save_path=""):
+    """Decode T2V latents and write one .mp4 per scale. Caches existing files when re-running."""
+    from diffusers.utils import export_to_video
+
+    vid_paths = []
+    if save_path == "":
+        import datetime
+        time_id = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_dir = f"generated_videos/{experiment}/{tag}/{time_id}"
+        os.makedirs(output_dir, exist_ok=True)
+        missing_scales = list(mapped_latents.keys())
+    else:
+        seed = os.path.splitext(os.path.basename(save_path))[0]
+        output_dir = f"generated_videos/{experiment}/{tag}/{seed}"
+        os.makedirs(output_dir, exist_ok=True)
+        missing_scales = [
+            scale for scale in mapped_latents.keys()
+            if not os.path.exists(f"{output_dir}/scale_{scale}.mp4")
+        ]
+
+    for scale in missing_scales:
+        latents = mapped_latents[scale]
+        flush()
+        with torch.no_grad():
+            frames = base_model.decode_latents(latents)
+        # `decode_latents` returns float32 in [0, 1]. `export_to_video` itself does
+        # `(frame * 255).astype(uint8)`, so pre-scaling here would double-scale and
+        # overflow uint8, producing inverted colors.
+        frames_np = frames.squeeze(0)
+        vid_paths.append(
+            export_to_video(frames_np, f"{output_dir}/scale_{scale}.mp4", fps=fps)
+        )
+
+    for scale in mapped_latents.keys():
+        scale_file = f"{output_dir}/scale_{scale}.mp4"
+        if os.path.exists(scale_file) and scale_file not in vid_paths:
+            vid_paths.append(scale_file)
+
+    return vid_paths
+
+
+def compute_metrics(vid_paths, prompts, logger, tag=None, save_path=""):
+    """Run video metrics (LPIPS + CLIP/ViCLIP text alignment) on each (edit, source) pair."""
+    import pickle
+    from evaluation.eval import EvaluatorWrapper
+
+    if save_path != "":
+        seed = save_path.split(os.sep)[-1].split(".")[0]
+        video_scores_path = os.path.join("video_scores", *save_path.split(os.sep)[1:])
+        os.makedirs(os.path.dirname(video_scores_path), exist_ok=True)
+        scores_file = os.path.join(video_scores_path, f"{seed}.pkl")
+        if os.path.exists(scores_file):
+            with open(scores_file, "rb") as f:
+                return pickle.load(f)
+    else:
+        video_scores_path = os.path.join("video_scores", f"{tag}")
+        os.makedirs(os.path.dirname(video_scores_path), exist_ok=True)
+        scores_file = os.path.join(video_scores_path, "scores.pkl")
+
+    evaluation = EvaluatorWrapper(
+        metrics=["lpips", "viclip_text_alignment", "clip_text_alignment"]
+    )
+
+    source_vid_path = None
+    for vid in vid_paths:
+        name = vid.split("/")[-1]
+        if "scale_0.mp4" in name or "scale_0.0.mp4" in name:
+            source_vid_path = vid
+            break
+    if source_vid_path is None:
+        raise ValueError("compute_metrics: no scale_0 video found among vid_paths")
+
+    all_pos_results = []
+    all_neg_results = []
+    for vid in vid_paths:
+        scale = float(vid.split("/")[-1].split("_")[1].replace(".mp4", ""))
+        positive_results = evaluation.evaluate(
+            edit_video=vid, reference_video=source_vid_path, edit_prompt=prompts.positive,
+        )
+        positive_results["scale"] = scale
+        all_pos_results.append(positive_results)
+
+        negative_results = evaluation.evaluate(
+            edit_video=vid, reference_video=source_vid_path, edit_prompt=prompts.negative,
+        )
+        negative_results["scale"] = scale
+        all_neg_results.append(negative_results)
+
+    os.makedirs(os.path.dirname(scores_file), exist_ok=True)
+    with open(scores_file, "wb") as f:
+        pickle.dump((all_pos_results, all_neg_results), f)
+
+    return all_pos_results, all_neg_results

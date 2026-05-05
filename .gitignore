@@ -25,9 +25,16 @@ T2I_sd_latents/
 T2I_latents/
 T2A_sd_latents/
 T2A_latents/
+T2V_sd_latents/
+T2V_latents/
+video_scores/
+generated_videos/
 
 # Pretrained model checkpoints (manual downloads, see README)
 /models/
+evaluation/metric_models/*.pth
+evaluation/metric_models/*.pt
+evaluation/metric_models/*.gz
 
 # OS generated files
 .DS_Store

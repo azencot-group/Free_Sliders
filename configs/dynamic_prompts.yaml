@@ -1,0 +1,88 @@
+- neutral: "A white sailboat in the ocean."
+  positive: "A white sailboat in the stormy wavy ocean."
+  negative: "A white sailboat in the calm flat ocean."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "sailboat"
+  variations:
+
+- neutral: "A river flowing through the valley."
+  positive: "A river rushing rapidly through the valley, with very big waves."
+  negative: "A river gently trickling through the valley, with very calm flat water."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "river_waves"
+  variations:
+
+- neutral: "A butterfly on a leaf."
+  positive: "A butterfly flapping its wings very fast."
+  negative: "A butterfly standing on a leaf not moving."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "butterfly_wings"
+  variations:
+
+- neutral: "A train moving along the tracks."
+  positive: "A high-speed train racing along the tracks, smoke coming out the chimney."
+  negative: "A slow train moving steadily along the tracks, barely any movement."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "train"
+  variations:
+
+- neutral: "A dog running in the park."
+  positive: "A dog sprinting excitedly in the park."
+  negative: "A dog trotting lazily in the park."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "dog_running"
+  variations:
+
+- neutral: "A car driving through the street."
+  positive: "A car driving very fast, speeding through the street."
+  negative: "A car driving very slowly, cruising through the street."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "car_driving"
+  variations:
+
+- neutral: "A golden retriever."
+  positive: "A golden retriever jumping and wagging its tail."
+  negative: "A golden retriever laying down tired."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "golden_retriever"
+  variations:
+
+- neutral: "A silhouette of a person walking on the beach."
+  positive: "A silhouette of a person jogging very fast on the beach."
+  negative: "A silhouette of a person strolling slowly down the beach."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "silhouette"
+  variations:
+
+- neutral: "A surfer riding a wave."
+  positive: "A surfer riding a massive wave, the water engulfing him."
+  negative: "A surfer riding a small wave, calm water."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "surfer"
+  variations:
+
+- neutral: "A car driving on the street."
+  positive: "A car driving very fast and speeding on the street."
+  negative: "A car driving very slowly, almost not moving on the street."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "car_movement"
+  variations:
+
+#- neutral: "A chicken crossing the road."
+#  positive: "A chicken walking fast across the road."
+#  negative: "A chicken standing in the middle of the road."
+#  guidance_scale: 9
+#  batch_size: 1
+#  tag: "chicken_crossing"
+#  variations:
+

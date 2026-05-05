@@ -1,7 +1,7 @@
 from typing_extensions import Optional
 from tqdm import tqdm
 import random
-from diffusers import LMSDiscreteScheduler
+from diffusers import LMSDiscreteScheduler, CogVideoXDPMScheduler
 import pickle
 import os
 import torch
@@ -104,6 +104,7 @@ class FreeSliders:
             generator1 = torch.Generator().manual_seed(seed)
 
             is_t2a = "StableAudio" in type(self.base_model).__name__ or "StableAudio" in base_model_kind
+            is_t2v = "CogVideoX" in type(self.base_model).__name__ or "CogVideoX" in base_model_kind
 
             latents = latents * self.base_model.noise_scheduler.init_noise_sigma
 
@@ -132,6 +133,7 @@ class FreeSliders:
                 for scale in missing_scales:
                     latents = base_latents
                     noise_scheduler_cp = copy.deepcopy(ns)
+                    old_pred_original_sample = None
                     for j, t in enumerate(tqdm(noise_scheduler_cp.timesteps[timestep_to:total_steps],
                                                desc=f"Diffusing with scale {scale}"
                                                ), start=timestep_to):
@@ -167,6 +169,21 @@ class FreeSliders:
                             )
                             modified_noise = neutral_noise + scale * (positive_noise - negative_noise).mean(0)[None]
                             if isinstance(self.base_model.noise_scheduler, LMSDiscreteScheduler):
+                                latents = noise_scheduler_cp.step(modified_noise, t, latents).prev_sample
+                            elif is_t2v and isinstance(self.base_model.noise_scheduler, CogVideoXDPMScheduler):
+                                extra_step_kwargs = {"eta": 0.0, "generator": None}
+                                prev_t = (self.base_model.noise_scheduler.timesteps[0:total_steps])[j - 1] if j > 0 else None
+                                latents, old_pred_original_sample = noise_scheduler_cp.step(
+                                    modified_noise,
+                                    old_pred_original_sample,
+                                    t,
+                                    prev_t,
+                                    latents,
+                                    **extra_step_kwargs,
+                                    return_dict=False,
+                                )
+                                latents = latents.to(neutral_embeddings.dtype)
+                            else:
                                 latents = noise_scheduler_cp.step(modified_noise, t, latents).prev_sample
 
                     scale_latents[scale] = latents

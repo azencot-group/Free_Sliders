@@ -28,9 +28,10 @@ def main(base_model, args, prompts):
 
     # Save the prompts and prompts embeddings to be evaluated
     text_embeddings = {}
-    if args.BaseModel == "T2I" or args.static:
-        static_prompt_embeddings = base_model.encode_prompts(prompts['static'])
-        text_embeddings["static"] = static_prompt_embeddings
+    if "static" in prompts and (args.BaseModel == "T2I" or args.static):
+        text_embeddings["static"] = base_model.encode_prompts(prompts["static"])
+    if "dynamic" in prompts and args.dynamic:
+        text_embeddings["dynamic"] = base_model.encode_prompts(prompts["dynamic"])
 
     base_model.delete_and_flush()
 
@@ -53,10 +54,9 @@ def main(base_model, args, prompts):
 
     logger.stop()
 
-    del (
-        base_model.network,
-        base_model.noise_scheduler,
-    )
+    for attr in ("network", "transformer", "model", "noise_scheduler"):
+        if hasattr(base_model, attr):
+            delattr(base_model, attr)
 
     flush()
 
@@ -114,6 +114,20 @@ if __name__ == '__main__':
         )
         audio_prompts = load_prompts_from_yaml(audio_prompts_file, [])
         prompts["static"] = audio_prompts
+    elif args.BaseModel == "T2V":
+        module_name = "base_models.BaseModelCogVideoX"
+
+        video_cfg = getattr(config, "video", None)
+        if args.dynamic:
+            dynamic_prompts_file = (
+                video_cfg.dynamic_prompts_file if video_cfg is not None else "configs/dynamic_prompts.yaml"
+            )
+            prompts["dynamic"] = load_prompts_from_yaml(dynamic_prompts_file, [])
+        if args.static:
+            static_prompts_file = (
+                video_cfg.static_prompts_file if video_cfg is not None else "configs/static_prompts.yaml"
+            )
+            prompts["static"] = load_prompts_from_yaml(static_prompts_file, [])
 
     if args.prompt_index != -1 and args.static:
         if 0 <= args.prompt_index < len(prompts["static"]):

@@ -111,7 +111,9 @@ class TE:
         if missing_scales:
             print(f"Running missing scales: {missing_scales}")
 
-            is_t2a = "StableAudio" in type(self.base_model).__name__
+            base_model_kind = type(self.base_model).__module__
+            is_t2a = "StableAudio" in type(self.base_model).__name__ or "StableAudio" in base_model_kind
+            is_t2v = "CogVideoX" in type(self.base_model).__name__ or "CogVideoX" in base_model_kind
 
             self.base_model.noise_scheduler.set_timesteps(self.base_model.max_steps, device=self.base_model.device)
             generator1 = torch.Generator().manual_seed(seed)
@@ -138,7 +140,7 @@ class TE:
                 ns = self.base_model.noise_scheduler
                 import copy
 
-                total_steps = self.base_model.max_steps if is_t2a else 50
+                total_steps = self.base_model.max_steps if (is_t2a or is_t2v) else 50
 
                 for scale in missing_scales:
                     generator2 = copy.deepcopy(generator1)

@@ -5,7 +5,7 @@ Free_Sliders is a multimodal framework for generating concept sliders using text
 **🎯 Multimodality Support:**
 - ✅ **Text-to-Image**: Stable Diffusion v1.5
 - ✅ **Text-to-Audio**: Stable Audio Open
-- 🚧 **Text-to-Video**: Code coming soon
+- ✅ **Text-to-Video**: CogVideoX-2b
 
 The framework is designed to be extensible across different modalities, enabling concept sliders for various types of content generation.
 
@@ -36,8 +36,21 @@ The framework is designed to be extensible across different modalities, enabling
    |---|---|---|
    | Stable Diffusion v1.5 | T2I pipeline | HuggingFace cache (`~/.cache/huggingface/`) |
    | Stable Audio Open 1.0 | T2A pipeline | HuggingFace cache (requires `huggingface-cli login` + license accept) |
-   | CLIP ViT-B/32 | image evaluation (CLIP score) | HuggingFace cache |
+   | CogVideoX-2b | T2V pipeline | HuggingFace cache (~10 GB) |
+   | CLIP ViT-B/32 / ViT-L/14 | image + video evaluation (CLIP score) | HuggingFace cache |
    | AlexNet | image evaluation (LPIPS) | `~/.cache/torch/hub/checkpoints/` |
+
+   **ViCLIP weights (manual download required).** The T2V evaluator's ViCLIP metric needs the InternVid-10M-FLT checkpoint (~1.6 GB), which is gated on HuggingFace. LPIPS linear weights and the CLIP BPE vocab are resolved automatically from the installed `lpips` and `clip` packages, so no copying is required for those.
+
+   ```bash
+   # Visit https://huggingface.co/OpenGVLab/ViCLIP, fill the access form, then:
+   huggingface-cli login   # paste a token from huggingface.co/settings/tokens
+   mkdir -p evaluation/metric_models
+   huggingface-cli download OpenGVLab/ViCLIP ViClip-InternVid-10M-FLT.pth \
+     --local-dir evaluation/metric_models
+   ```
+
+   Without `ViClip-InternVid-10M-FLT.pth` the T2V evaluator skips the ViCLIP metric and falls back to per-frame CLIP only.
 
    **Audio evaluation requires manual checkpoint downloads** (CLAP weights are not auto-fetched by `laion_clap`). After installing the `audio-eval` extra, run:
 
@@ -62,12 +75,13 @@ The framework is designed to be extensible across different modalities, enabling
 ```bash
 jupyter notebook T2I_interactive.ipynb   # Stable Diffusion concept sliders
 jupyter notebook T2A_interactive.ipynb   # Stable Audio Open concept sliders (CPU/MPS/CUDA)
+jupyter notebook T2V_interactive.ipynb   # CogVideoX concept sliders (CPU/MPS/CUDA)
 ```
 
 These notebooks provide:
 - Step-by-step guidance through the pipeline
 - Interactive parameter adjustment
-- Visual output display (audio playback + spectrograms in the T2A notebook)
+- Visual output display (audio playback + spectrograms in the T2A notebook, inline video in the T2V notebook)
 - Easy experimentation with different prompts and concepts
 
 ### Option 2: Command Line Interface
@@ -78,12 +92,18 @@ python main.py --BaseModel T2I --method FreeSliders --scales -6 -3 0 4 8
 
 # Audio sliders
 python main.py --BaseModel T2A --method FreeSliders --scales -3 0 3
+
+# Video sliders (static composition concepts)
+python main.py --BaseModel T2V --method FreeSliders --scales -3 0 3 --static
+
+# Video sliders (dynamic motion concepts)
+python main.py --BaseModel T2V --method FreeSliders --scales -3 0 3 --dynamic
 ```
 
 #### Available Parameters:
 
 **Required:**
-- `--BaseModel`: Choose base model (`T2I` or `T2A`)
+- `--BaseModel`: Choose base model (`T2I`, `T2A`, or `T2V`)
 
 **Optional:**
 - `--method`: Method to use (`FreeSliders` or `TE`, default: `FreeSliders`)
@@ -226,8 +246,5 @@ Run the code with different concepts to explore the capabilities of Free_Sliders
 ## Future Roadmap
 
 Free_Sliders is evolving into a comprehensive multimodal framework:
-
-## Coming Soon
-- 🎬 Video concept sliders
 
 Stay tuned for updates as we expand Free_Sliders to support the full spectrum of generative AI modalities!

@@ -1,0 +1,95 @@
+- neutral: "A mountaintop from afar with a few people hiking down it."
+  positive: "A mountaintop from afar with a lot of people hiking down it, very busy."
+  negative: "A mountaintop from afar with a no people hiking down it, empty."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "mountain_hiking"
+  variations:
+
+- neutral: "A car cruising down the street."
+  positive: "A shiny sports car cruising down the street."
+  negative: "An old fashioned faded car cruising down the street."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "car_type"
+  variations:
+
+- neutral: "A car cruising down the street."
+  positive: "A white car cruising down the street."
+  negative: "A black car cruising down the street."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "car_color"
+  variations:
+
+- neutral: "A large mountain in the distance."
+  positive: "An all white snow-capped large mountain in the distance."
+  negative: "A brown dry and rocky large mountain in the distance."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "mountain_type"
+  variations:
+
+- neutral: "A pitcher pouring clear water into a cup on the table."
+  positive: "A pitcher pouring white milk into a cup on the table."
+  negative: "A pitcher pouring black coffee into a cup on the table."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "cup"
+  variations:
+
+- neutral: "A tall tree in a windy park."
+  positive: "A tall green leafy tree in a windy park, very green and with lots of leaves."
+  negative: "A tall dry brown bare tree with in a windy park, no leaves on branches."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "tree"
+  variations:
+
+- neutral: "A cat sitting on a windowsill licking its paws."
+  positive: "A very fat fluffy, well-groomed cat sitting on a windowsill licking its paws."
+  negative: "A very skinny, thin, scruffy cat sitting on a windowsill licking its paws."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "cat_fat"
+  variations:
+
+- neutral: "A cat sitting on a windowsill licking its paws."
+  positive: "A very bright orange cat sitting on a windowsill licking its paws."
+  negative: "A very dark gray cat sitting on a windowsill licking its paws."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "cat_color"
+  variations:
+
+- neutral: "Waves splashing on a lighthouse in the sea."
+  positive: "Waves splashing on a lighthouse in the sea, during the daytime, sunny."
+  negative: "Waves splashing on a lighthouse in the sea, during nighttime, full moon."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "lighthouse_day"
+  variations:
+
+- neutral: "A lighthouse in the sea, surrounded by water."
+  positive:  "A lighthouse in the sea, surrounded by dark splashy water with lots of waves."
+  negative:  "A lighthouse in the sea, surrounded by bright calm, flat water."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "lighthouse_water"
+  variations:
+
+- neutral: "A dog playing in the park."
+  positive: "A white dog with light fur playing in the park."
+  negative: "A black dog with dark fur playing in the park."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "dog_color"
+  variations:
+
+- neutral: "A butterfly landing on a leaf."
+  positive: "A blue and gold butterfly landing on a leaf."
+  negative: "A red and white butterfly landing on a leaf."
+  guidance_scale: 9
+  batch_size: 1
+  tag: "butterfly_colors"
+  variations:

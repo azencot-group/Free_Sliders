@@ -31,3 +31,11 @@ audio:
   max_steps: 36
   prompts_file: "configs/audio_prompts.yaml"
   # clap_checkpoint_path: "/path/to/clap_models"  # optional, enables CLAP/LPAPS evaluation
+video:
+  pretrained_model: "THUDM/CogVideoX-2b"
+  height: 480
+  width: 720
+  num_frames: 24
+  max_steps: 50
+  static_prompts_file: "configs/static_prompts.yaml"
+  dynamic_prompts_file: "configs/dynamic_prompts.yaml"
